@@ -4,7 +4,7 @@ pipeline {
     stage('compile') {
       steps {
         git 'https://github.com/lerndevops/samplejavaapp.git'
-        sh '/usr/share/maven/mvn compile'
+        sh '/usr/share/maven/bin/mvn compile'
         sleep 10
       }
     }
@@ -12,7 +12,7 @@ pipeline {
     stage('codereview-pmd') {
       
       steps {
-        sh '/usr/share/maven/mvn -P metrics pmd:pmd'
+        sh '/usr/share/maven/bin/mvn -P metrics pmd:pmd'
       }
     }
 
@@ -24,7 +24,7 @@ pipeline {
 
       }
       steps {
-        sh '/usr/share/maven/mvn test'
+        sh '/usr/share/maven/bin/mvn test'
       }
     }
 
@@ -36,13 +36,13 @@ pipeline {
 
       }
       steps {
-        sh '/usr/share/maven/mvn cobertura:cobertura -Dcobertura.report.format=xml'
+        sh '/usr/share/maven/bin/mvn cobertura:cobertura -Dcobertura.report.format=xml'
       }
     }
 
     stage('package') {
       steps {
-        sh '/usr/share/naven/mvn clean package'
+        sh '/usr/share/naven/bin/mvn clean package'
       }
     }
 
